@@ -18,6 +18,9 @@ subject to the following restrictions:
 
 #include "btTransform.h"
 
+class btRigidBody;
+
+
 ///The btMotionState interface class allows the dynamics world to synchronize and interpolate the updated world transforms with graphics
 ///For optimizations, potentially only moving objects get synchronized (using setWorldPosition/setWorldOrientation)
 class	btMotionState
@@ -34,6 +37,10 @@ class	btMotionState
 		//Bullet only calls the update of worldtransform for active objects
 		virtual void	setWorldTransform(const btTransform& worldTrans)=0;
 		
+        
+        virtual void    setLinearVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep)=0;
+        virtual void    setAngularVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep)=0;
+        virtual void    forcesCleared() = 0;
 	
 };
 

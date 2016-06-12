@@ -36,6 +36,9 @@ ATTRIBUTE_ALIGNED16(struct)	btDefaultMotionState : public btMotionState
 	}
 
 	
+    virtual void    setLinearVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep) {}
+    virtual void    setAngularVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep) {}
+    virtual void    forcesCleared() {}
 
 };
 

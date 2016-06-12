@@ -318,11 +318,19 @@ public:
 	void applyCentralImpulse(const btVector3& impulse)
 	{
 		m_linearVelocity += impulse *m_linearFactor * m_inverseMass;
+        
+        if (m_optionalMotionState) {
+            m_optionalMotionState->setLinearVelocity(m_linearVelocity, &impulse, 0);
+        }
 	}
 	
   	void applyTorqueImpulse(const btVector3& torque)
 	{
-			m_angularVelocity += m_invInertiaTensorWorld * torque * m_angularFactor;
+		m_angularVelocity += m_invInertiaTensorWorld * torque * m_angularFactor;
+            
+        if (m_optionalMotionState) {
+            m_optionalMotionState->setAngularVelocity(m_angularVelocity, &torque, 0);
+        }
 	}
 	
 	void applyImpulse(const btVector3& impulse, const btVector3& rel_pos) 
@@ -341,6 +349,10 @@ public:
 	{
 		m_totalForce.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
 		m_totalTorque.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
+        
+        if (m_optionalMotionState) {
+            m_optionalMotionState->forcesCleared();
+        }
 	}
 	
 	void updateInertiaTensor();    
@@ -365,12 +377,20 @@ public:
 	{ 
 		m_updateRevision++;
 		m_linearVelocity = lin_vel; 
+
+        if (m_optionalMotionState) {
+            m_optionalMotionState->setLinearVelocity(lin_vel, 0, 0);
+        }
 	}
 
 	inline void setAngularVelocity(const btVector3& ang_vel) 
 	{ 
 		m_updateRevision++;
 		m_angularVelocity = ang_vel; 
+        
+        if (m_optionalMotionState) {
+            m_optionalMotionState->setAngularVelocity(ang_vel, 0, 0);
+        }
 	}
 
 	btVector3 getVelocityInLocalPoint(const btVector3& rel_pos) const

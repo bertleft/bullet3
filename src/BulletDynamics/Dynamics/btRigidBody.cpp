@@ -210,6 +210,11 @@ void			btRigidBody::applyDamping(btScalar timeStep)
 			}
 		}
 	}
+    
+    if (m_optionalMotionState) {
+        m_optionalMotionState->setLinearVelocity(m_linearVelocity, 0, m_linearDamping);
+        m_optionalMotionState->setAngularVelocity(m_angularVelocity, 0, m_angularDamping);
+    }
 }
 
 
@@ -289,6 +294,11 @@ void btRigidBody::integrateVelocities(btScalar step)
 	{
 		m_angularVelocity *= (MAX_ANGVEL/step) /angvel;
 	}
+    
+    if (m_optionalMotionState) {
+        m_optionalMotionState->setLinearVelocity(m_linearVelocity, &m_totalForce, step);
+        m_optionalMotionState->setAngularVelocity(m_angularVelocity, &m_totalTorque, step);
+    }
 
 }
 

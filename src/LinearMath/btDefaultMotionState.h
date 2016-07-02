@@ -1,6 +1,10 @@
 #ifndef BT_DEFAULT_MOTION_STATE_H
 #define BT_DEFAULT_MOTION_STATE_H
 
+/*
+ This file has been modified from the original Bullet Physics version by Albert Santos.
+ */
+
 #include "btMotionState.h"
 
 ///The btDefaultMotionState provides a common implementation to synchronize world transforms with offsets.

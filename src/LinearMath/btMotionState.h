@@ -46,6 +46,8 @@ class	btMotionState
         virtual void    setLinearVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep)=0;
         virtual void    setAngularVelocity(const btVector3 & vel, const btVector3 * cause, btScalar tStep)=0;
         virtual void    forcesCleared() = 0;
+        virtual void    setTotalForce(const btVector3 & force)=0;
+        virtual void    setTotalTorque(const btVector3 & torque)=0;
 	
 };
 

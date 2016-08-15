@@ -280,6 +280,10 @@ public:
 	void			applyCentralForce(const btVector3& force)
 	{
 		m_totalForce += force*m_linearFactor;
+		
+		if (m_optionalMotionState) {
+			m_optionalMotionState->setTotalForce(m_totalForce);
+		}
 	}
 
 	const btVector3& getTotalForce() const
@@ -311,6 +315,10 @@ public:
 	void	applyTorque(const btVector3& torque)
 	{
 		m_totalTorque += torque*m_angularFactor;
+		
+		if (m_optionalMotionState) {
+			m_optionalMotionState->setTotalTorque(m_totalTorque);
+		}
 	}
 	
 	void	applyForce(const btVector3& force, const btVector3& rel_pos) 
